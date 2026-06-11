@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Boston Beer QBR | Walmart Connect | FY25</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --wm-blue:#0053e2; --wm-blue-dark:#003da8;
+    --wm-spark:#ffc220; --wm-spark-dark:#995213;
+    --wm-red:#ea1100; --wm-green:#2a8703;
+    --bbc-red:#c0392b; --bbc-gold:#f39c12;
+  }
+  body { font-family:'Segoe UI',system-ui,sans-serif; background:#f0f4fa; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:.71rem; font-weight:700; letter-spacing:.04em; }
+  .badge-green  { background:#dcfce7; color:#15803d; }
+  .badge-red    { background:#fee2e2; color:#b91c1c; }
+  .badge-blue   { background:#dbeafe; color:#1d4ed8; }
+  .badge-yellow { background:#fef9c3; color:#854d0e; }
+  .badge-gray   { background:#f1f5f9; color:#475569; }
+  .badge-spark  { background:#ffc220; color:#1a1a1a; }
+  .badge-orange { background:#ffedd5; color:#c2410c; }
+  .kpi-card { background:#fff; border-radius:12px; padding:18px 22px; box-shadow:0 1px 8px rgba(0,0,0,.08); }
+  .section-card { background:#fff; border-radius:14px; padding:24px 28px; box-shadow:0 1px 6px rgba(0,0,0,.07); }
+  .section-title { font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:#64748b; margin-bottom:14px; }
+  table { width:100%; border-collapse:collapse; }
+  th { background:#f8fafc; font-size:.71rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#475569; padding:9px 14px; text-align:left; border-bottom:2px solid #e2e8f0; }
+  td { font-size:.84rem; padding:9px 14px; border-bottom:1px solid #f1f5f9; vertical-align:top; color:#1e293b; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:#fafbff; }
+  .check { color:#2a8703; font-weight:700; }
+  .cross { color:#ea1100; font-weight:700; }
+  .pill { display:inline-block; padding:3px 11px; border-radius:999px; font-size:.73rem; font-weight:600; border:1.5px solid; margin:2px; }
+  .pill-green  { border-color:#86efac; color:#15803d; background:#f0fdf4; }
+  .pill-blue   { border-color:#93c5fd; color:#1d4ed8; background:#eff6ff; }
+  .pill-red    { border-color:#fca5a5; color:#b91c1c; background:#fff1f2; }
+  .pill-amber  { border-color:#fcd34d; color:#92400e; background:#fffbeb; }
+  .cap-using   { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:1.5px solid #86efac; border-radius:12px; padding:18px; }
+  .cap-missing { background:linear-gradient(135deg,#fff1f2,#fee2e2); border:1.5px solid #fca5a5; border-radius:12px; padding:18px; }
+  .season-bar  { height:8px; border-radius:4px; background:#e2e8f0; }
+  .season-fill { height:8px; border-px; }
+  .tab-btn { padding:8px 18px; border-radius:8px; font-size:.82rem; font-weight:600; color:#475569; cursor:pointer; transition:all .15s; border:none; background:transparent; }
+  .tab-btn.active { background:var(--wm-blue); color:#fff; }
+  .tab-btn:not(.active):hover { background:#e8edf8; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  .opportunity-card { border-radius:12px; padding:16px 20px; border-left:4px solid; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ===== GLOBAL HEADER ===== -->
+<header style="background:var(--wm-blue);" class="sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-3">
+      <div style="background:var(--wm-spark);" class="w-8 h-8 rounded-lg flex items-center justify-center font-black text-black text-sm">W</div>
+      <div>
+        <div class="text-white font-bold text-base leading-tight">Boston Beer Corporation · Business Review</div>
+        <div class="text-blue-200 text-xs">Walmart Connect · FY25 Annual Review · May 2025</div>
+      </div>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <span class="badge badge-spark">FY25 QBR</span>
+      <span class="badge" style="background:rgba(255,255,255,.15);color:#fff;">Brands: Twisted Tea · Truly · Sun Cruiser · Angry Orchard</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- ===== HERO STRIP ===== -->
+  <div style="background:linear-gradient(135deg,#c0392b 0%,#7c2d12 50%,#1c0a04 100%);" class="rounded-2xl p-8 text-white shadow-xl">
+    <div class="flex flex-wrap justify-between items-start gap-6">
+      <div>
+        <p class="text-red-200 text-xs font-semibold uppercase tracking-widest mb-1">Walmart Connect · Annual Business Review</p>
+        <h1 class="text-3xl font-black mb-2">Boston Beer Corporation</h1>
+        <p class="text-red-100 text-sm max-w-2xl">FY25 saw 5 display campaigns generating <strong>$12.6M</strong> in total attributed sales, <strong>162K new buyers</strong>, and a <strong>14.5% average sales lift</strong> — with significant headroom to scale through CTV, Audio, Vizio, and advanced audience targeting.</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="badge badge-spark">Active: Offsite Display</span>
+          <span class="badge badge-red">Not Using: CTV · Audio · Vizio · Co-Brand</span>
+          <span class="badge" style="background:rgba(255,255,255,.18);color:#fff;">Agency: Hearts &amp; Science / TTD</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3 text-center min-w-fit">
+        <div class="bg-white bg-opacity-10 rounded-xl px-5 py-3">
+          <div class="text-2xl font-black text-yellow-300">$12.6M</div>
+          <div class="text-red-200 text-xs mt-0.5">Total Attr. Sales</div>
+        </div>
+        <div class="bg-white bg-opacity-10 rounded-xl px-5 py-3">
+          <div class="text-2xl font-black text-yellow-300">$15.4</div>
+          <div class="text-red-200 text-xs mt-0.5">Est. Total ROAS</div>
+        </div>
+        <div class="bg-white bg-opacity-10 rounded-xl px-5 py-3">
+          <div class="text-2xl font-black text-yellow-300">57%</div>
+          <div class="text-red-200 text-xs mt-0.5">New Buyers</div>
+        </div>
+        <div class="bg-white bg-opacity-10 rounded-xl px-5 py-3">
+          <div class="text-2xl font-black text-yellow-300">14.5%</div>
+          <div class="text-red-200 text-xs mt-0.5">Avg. Sales Lift</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KPI ROW ===== -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+    <div class="kpi-card text-center"><div class="text-xl font-black text-blue-700">5</div><div class="text-xs text-slate-500 mt-1">Campaigns Run</div></div>
+    <div class="kpi-card text-center"><div class="text-xl font-black text-blue-700">$793K</div><div class="text-xs text-slate-500 mt-1">Total Investment</div></div>
+    <div class="kpi-card text-center"><div class="text-xl font-black text-green-700">162K</div><div class="text-xs text-slate-500 mt-1">New Buyers</div></div>
+    <div class="kpi-card text-center"><div class="text-xl font-black text-green-700">$1.2M</div><div class="text-xs text-slate-500 mt-1">Incremental ROI</div></div>
+    <div class="kpi-card text-center"><div class="text-xl font-black text-blue-700">140M+</div><div class="text-xs text-slate-500 mt-1">Impressions</div></div>
+    <div class="kpi-card text-center"><div class="text-xl font-black text-blue-700">364K</div><div class="text-xs text-slate-500 mt-1">Traceable Units</div></div>
+  </div>
+
+  <!-- ===== SECTION TABS ===== -->
+  <div class="bg-white rounded-xl p-1.5 shadow-sm flex gap-1 overflow-x-auto">
+    <button onclick="showSection('capabilities')" class="tab-btn active whitespace-nowrap">📦 Capabilities</button>
+    <button onclick="showSection('audiences')"    class="tab-btn whitespace-nowrap">🎯 Audiences</button>
+    <button onclick="showSection('category')"     class="tab-btn whitespace-nowrap">📈 Category Share</button>
+    <button onclick="showSection('performance')"  class="tab-btn whitespace-nowrap">🏆 Campaign Performance</button>
+    <button onclick="showSection('omni')"         class="tab-btn whitespace-nowrap">🔗 Omni-Media Impact</button>
+    <button onclick="showSection('measurement')"  class="tab-btn whitespace-nowrap">📊 Measurement</button>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: CAPABILITIES -->
+  <!-- ================================================================== -->
+  <div id="section-capabilities" class="tab-panel active space-y-5">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <!-- USING -->
+      <div class="section-card">
+        <div class="section-title">✅ Capabilities Currently in Use</div>
+        <div class="space-y-3">
+
+          <div class="cap-using">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-green-800">Offsite Display</p>
+                <p class="text-xs text-green-700 mt-0.5">140M+ impressions served across 5 campaigns · $793K invested</p>
+              </div>
+              <span class="badge badge-green ml-2 shrink-0">Active</span>
+            </div>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span class="pill pill-green text-xs">Twisted Tea</span>
+              <span class="pill pill-green text-xs">Angry Orchard</span>
+              <span class="pill pill-green text-xs">Sun Cruiser</span>
+              <span class="pill pill-green text-xs">Truly</span>
+            </div>
+          </div>
+
+          <div class="cap-using">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-green-800">Walmart 1st Party Data Targeting</p>
+                <p class="text-xs text-green-700 mt-0.5">Leveraging Walmart purchase, browse and search signals via the WMT DSP / TTD</p>
+              </div>
+              <span class="badge badge-green ml-2 shrink-0">Active</span>
+            </div>
+          </div>
+
+          <div class="cap-using">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-green-800">Sales Lift Measurement</p>
+                <p class="text-xs text-green-700 mt-0.5">3 of 5 campaigns qualified for statistically significant sales lift analysis · Avg. 14.5% lift</p>
+              </div>
+              <span class="badge badge-green ml-2 shrink-0">Active</span>
+            </div>
+          </div>
+
+          <div class="cap-using">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-green-800">New Buyer Analysis</p>
+                <p class="text-xs text-green-700 mt-0.5">57% of all detected buyers were new — strong upper-funnel capture</p>
+              </div>
+              <span class="badge badge-green ml-2 shrink-0">Active</span>
+            </div>
+          </div>
+
+          <div class="cap-using">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-green-800">Basket Analysis</p>
+                <p class="text-xs text-green-700 mt-0.5">Cross-category basket insight active for Twisted Tea and Angry Orchard campaigns</p>
+              </div>
+              <span class="badge badge-green ml-2 shrink-0">Active</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NOT USING -->
+      <div class="section-card">
+        <div class="section-title">❌ Capabilities Not Currently in Use</div>
+        <div class="space-y-3">
+
+          <div class="cap-missing">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-red-800">CTV (Connected TV)</p>
+                <p class="text-xs text-red-700 mt-0.5">Shoppers exposed to ALL ad types converted at <strong>15.6%</strong> — the highest rate. CTV alone drives incremental reach beyond linear TV.</p>
+              </div>
+              <span class="badge badge-red ml-2 shrink-0">Not Using</span>
+            </div>
+            <div class="mt-2 p-2 bg-red-50 rounded text-xs text-red-800">
+              💡 <strong>Opportunity:</strong> Gen-Z Walmart customers are 10% more likely to stream TV than the avg. US consumer. Adding CTV to BBC's current Offsite Display buy moves buyer conversion from 2.6% to 3.6% — a 38% improvement.
+            </div>
+          </div>
+
+          <div class="cap-missing">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-red-800">Audio Advertising</p>
+                <p class="text-xs text-red-700 mt-0.5">62% of Gen-Z Walmart customers stream music daily/weekly — 1.4x more likely than the avg. US consumer</p>
+              </div>
+              <span class="badge badge-red ml-2 shrink-0">Not Using</span>
+            </div>
+            <div class="mt-2 p-2 bg-red-50 rounded text-xs text-red-800">
+              💡 <strong>Opportunity:</strong> Audio via SiriusXM reaches the exact Gen-Z demographic that drives Twisted Tea and Sun Cruiser growth — at moments when they can't be reached on screen.
+            </div>
+          </div>
+
+          <div class="cap-missing">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-red-800">Vizio / Home Screen</p>
+                <p class="text-xs text-red-700 mt-0.5">Premium high-visibility placement directly on smart TV home screens</p>
+              </div>
+              <span class="badge badge-red ml-2 shrink-0">Not Using</span>
+            </div>
+          </div>
+
+          <div class="cap-missing">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-red-800">Co-Brand Campaigns</p>
+                <p class="text-xs text-red-700 mt-0.5">Cross-category basket data shows strong correlation with chips, deli meats, bread — natural co-brand territory</p>
+              </div>
+              <span class="badge badge-red ml-2 shrink-0">Not Using</span>
+            </div>
+          </div>
+
+          <div class="cap-missing">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-sm text-red-800">Advanced Measurement Tiers</p>
+                <p class="text-xs text-red-700 mt-0.5">Strategic Campaign Analysis ($350K min), Total Market Sales Lift ($250K min), and Brand Lift ($150K min) are available but not yet fully unlocked across all campaigns</p>
+              </div>
+              <span class="badge badge-red ml-2 shrink-0">Partially Unlocked</span>
+            </div>
+            <div class="mt-2 p-2 bg-red-50 rounded text-xs text-red-800">
+              💡 See the <strong>Measurement tab</strong> for the full FY26 spend-based threshold breakdown and BBC's status against each tier.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPABILITY SUMMARY TABLE -->
+    <div class="section-card">
+      <div class="section-title">📋 Full Capability Summary</div>
+      <table>
+        <thead><tr><th>Capability</th><th>Status</th><th>Why It Matters</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td class="font-semibold">Offsite Display (WMT DSP / TTD)</td><td><span class="check">✅ Active</span></td><td>Core engine — 140M+ impressions, $15.4 ROAS, 57% new buyers</td><td><span class="badge badge-green">Maintain &amp; Scale</span></td></tr>
+          <tr><td class="font-semibold">Walmart 1st Party Data</td><td><span class="check">✅ Active</span></td><td>Drives targeting precision using purchase, browse, and behavioral signals</td><td><span class="badge badge-green">Maintain</span></td></tr>
+          <tr><td class="font-semibold">Sales Lift / New Buyer Measurement</td><td><span class="check">✅ Active</span></td><td>3 of 5 campaigns qualified; avg. 14.5% lift proves WMC efficacy</td><td><span class="badge badge-green">Scale to all campaigns</span></td></tr>
+          <tr><td class="font-semibold">CTV</td><td><span class="cross">❌ Not Active</span></td><td>Highest multi-touch buyer conversion (15.6%); incremental TV reach</td><td><span class="badge badge-red">Priority 1</span></td></tr>
+          
+          <tr><td class="font-semibold">Audio (SiriusXM)</td><td><span class="cross">❌ Not Active</span></td><td>Reaches Gen-Z (1.4x avg. music streamer) — key BBC audience</td><td><span class="badge badge-orange">Priority 3</span></td></tr>
+          <tr><td class="font-semibold">Vizio / Home Screen</td><td><span class="cross">❌ Not Active</span></td><td>Premium TV placement for brand awareness at scale</td><td><span class="badge badge-orange">Priority 3</span></td></tr>
+          <tr><td class="font-semibold">Co-Brand Campaigns</td><td><span class="cross">❌ Not Active</span></td><td>Basket data shows natural cross-category opportunity (chips, deli, bread)</td><td><span class="badge badge-yellow">Priority 4</span></td></tr>
+          <tr><td class="font-semibold">Sales Lift · Brand Lift · Total Market · Strategic Analysis</td><td><span class="cross">❌ Not Fully Unlocked</span></td><td>Spend-based: $150K–$350K per campaign — see Measurement tab</td><td><span class="badge badge-yellow">Unlock via Spend</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: AUDIENCES -->
+  <!-- ================================================================== -->
+  <div id="section-audiences" class="tab-panel space-y-5">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <!-- USING -->
+      <div class="section-card">
+        <div class="section-title">✅ Audiences Currently in Use</div>
+        <div class="space-y-3">
+          <div class="cap-using">
+            <p class="font-bold text-sm text-green-800">Category Historical Buyers</p>
+            <p class="text-xs text-green-700 mt-1">Historical buyers of Hard Beverages, Hard Seltzers, Craft Beer, and related categories at Walmart — the core foundation of all 5 campaigns.</p>
+          </div>
+          <div class="cap-using">
+            <p class="font-bold text-sm text-green-800">Brand Retargeting (Recent Buyers)</p>
+            <p class="text-xs text-green-700 mt-1">Historical buyers of Twisted Tea, Angry Orchard, Sun Cruiser, and Truly who have purchased recently at Walmart.</p>
+          </div>
+          <div class="cap-using">
+            <p class="font-bold text-sm text-green-800">Walmart 1st Party Omnichannel Data</p>
+            <p class="text-xs text-green-700 mt-1">In-store and online purchase signals powering audience segmentation — 91% of detected traceable sales came through in-store channels.</p>
+          </div>
+          <div class="cap-using">
+            <p class="font-bold text-sm text-green-800">New Buyer Prospecting (Offsite)</p>
+            <p class="text-xs text-green-700 mt-1">Campaigns reached shoppers who had not purchased BBC brands in the prior 12 months — successfully converting 162K new buyers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOT USING / EXPAND -->
+      <div class="section-card">
+        <div class="section-title">🚀 Audience Expansion Opportunities</div>
+        <div class="space-y-3">
+          <div class="cap-missing">
+            <p class="font-bold text-sm text-red-800">Custom Alcohol Taxonomy <span class="badge badge-red ml-1">Not Using</span></p>
+            <p class="text-xs text-red-700 mt-1">Premium DSP audiences available on request — precision targeting across beer sub-segments:</p>
+            <div class="mt-2 flex flex-wrap">
+              <span class="pill pill-blue text-xs">Domestic Beer</span>
+              <span class="pill pill-blue text-xs">Import Beer</span>
+              <span class="pill pill-blue text-xs">Mexican Import</span>
+              <span class="pill pill-blue text-xs">Craft Beer</span>
+              <span class="pill pill-blue text-xs">National Craft</span>
+              <span class="pill pill-blue text-xs">Regional &amp; Local Craft</span>
+              <span class="pill pill-blue text-xs">Hard Seltzers</span>
+              <span class="pill pill-blue text-xs">Hard Beverages</span>
+              <span class="pill pill-blue text-xs">Non-Alcoholic</span>
+            </div>
+            <div class="mt-2 p-2 bg-red-50 rounded text-xs text-red-800">💡 Target competitor drinkers (e.g., Mexican Import, Regional Craft) to conquest new buyers at scale.</div>
+          </div>
+          <div class="cap-missing">
+            <p class="font-bold text-sm text-red-800">Brand Historical – Lapsed Buyers <span class="badge badge-red ml-1">Not Using</span></p>
+            <p class="text-xs text-red-700 mt-1">Re-engage Twisted Tea, Truly, and Angry Orchard buyers who purchased in the past but have lapsed — strong win-back opportunity given Angry Orchard's -14.95% YoY sales decline.</p>
+          </div>
+          <div class="cap-missing">
+            <p class="font-bold text-sm text-red-800">Propensity / Brand Predictive Audiences <span class="badge badge-red ml-1">Not Using</span></p>
+            <p class="text-xs text-red-700 mt-1">Target customers most likely to purchase a BBC brand at Walmart during the campaign lifecycle — powered by predictive ML models on Walmart purchase and browse data.</p>
+          </div>
+          <div class="cap-missing">
+            <p class="font-bold text-sm text-red-800">Lookalike Audiences <span class="badge badge-red ml-1">Not Using</span></p>
+            <p class="text-xs text-red-700 mt-1">Build audiences from BBC's highest-value buyers and prospect to shoppers with matching behavioral signatures across Walmart's 130M+ monthly visitors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSONA EXPANSION TABLE -->
+    <div class="section-card">
+      <div class="section-title">👥 Recommended Persona Segments for Expansion</div>
+      <p class="text-xs text-slate-500 mb-4">Pre-built Walmart customer segments available for immediate activation across Offsite Display. Highly relevant to BBC's brand and consumer profiles.</p>
+      <table>
+        <thead><tr><th>Persona Segment</th><th>Relevance to Boston Beer</th><th>Brands to Target</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="font-semibold">Walmart Foodies</td>
+            <td>Basket analysis shows BBC buyers consistently purchase alongside food items — burgers, deli meats, chips, and bread</td>
+            <td><span class="pill pill-green">Twisted Tea</span><span class="pill pill-green">Sun Cruiser</span></td>
+            <td><span class="badge badge-red">High</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Food &amp; Cooking – Burgers</td>
+            <td>In-store basket data shows a direct link between BBC purchases and burger/BBQ ingredients — peak relevance in summer</td>
+            <td><span class="pill pill-green">Twisted Tea</span><span class="pill pill-green">Truly</span></td>
+            <td><span class="badge badge-red">High</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Sports Fans</td>
+            <td>Twisted Tea's brand identity is rooted in outdoor sports, tailgating, and lifestyle moments</td>
+            <td><span class="pill pill-green">Twisted Tea</span><span class="pill pill-green">Sun Cruiser</span></td>
+            <td><span class="badge badge-red">High</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Everyday Savers</td>
+            <td>Value-driven shoppers represent a key segment given BBC's price positioning relative to premium beer competitors</td>
+            <td><span class="pill pill-green">Twisted Tea</span><span class="pill pill-green">Angry Orchard</span></td>
+            <td><span class="badge badge-orange">Medium</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Pickup &amp; Delivery – Engaged</td>
+            <td>OPD buyers represent a fast-growing channel; 9% of traceable sales via Pickup &amp; Delivery with significant upside</td>
+            <td><span class="pill pill-green">All Brands</span></td>
+            <td><span class="badge badge-orange">Medium</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Healthy Living / Carb Conscious</td>
+            <td>Truly and Sun Cruiser's low-calorie positioning aligns with health-conscious segments; strong conquest opportunity</td>
+            <td><span class="pill pill-green">Truly</span><span class="pill pill-green">Sun Cruiser</span></td>
+            <td><span class="badge badge-orange">Medium</span></td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Leisure Travelers / Family Travelers</td>
+            <td>Seasonal and travel occasions align with Sun Cruiser and Truly's "lifestyle" brand positioning</td>
+            <td><span class="pill pill-green">Sun Cruiser</span><span class="pill pill-green">Truly</span></td>
+            <td><span class="badge badge-yellow">Low–Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GEN Z INSIGHT -->
+    <div class="section-card" style="border-left:4px solid var(--wm-spark);">
+      <div class="section-title">⚡ Gen-Z Walmart Customer Insight — Untapped for BBC</div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+          <div class="text-3xl font-black text-yellow-700">68%</div>
+          <div class="text-sm font-semibold text-yellow-800 mt-1">Stream TV Daily / Weekly</div>
+          <div class="text-xs text-yellow-700 mt-1">1.1x more likely than avg. US consumer</div>
+          <div class="mt-2"><span class="badge badge-red">BBC not on CTV</span></div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+          <div class="text-3xl font-black text-yellow-700">62%</div>
+          <div class="text-sm font-semibold text-yellow-800 mt-1">Stream Music Daily / Weekly</div>
+          <div class="text-xs text-yellow-700 mt-1">1.4x more likely than avg. US consumer</div>
+          <div class="mt-2"><span class="badge badge-red">BBC not on Audio</span></div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+          <div class="text-3xl font-black text-yellow-700">24%</div>
+          <div class="text-sm font-semibold text-yellow-800 mt-1">Stream Podcasts Daily / Weekly</div>
+          <div class="text-xs text-yellow-700 mt-1">Most popular: Comedy · True Crime · Music</div>
+          <div class="mt-2"><span class="badge badge-red">BBC not on Audio</span></div>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mt-3">Source: GWI – USA, Q3 2023. Gen-Z Walmart customers are a prime and reachable segment for Twisted Tea and Sun Cruiser that BBC is not currently reaching through WMC.</p>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: CATEGORY SHARE -->
+  <!-- ================================================================== -->
+  <div id="section-category" class="tab-panel space-y-5">
+
+    <div class="section-card" style="border-left:4px solid #ea1100;">
+      <div class="section-title">🎯 What Boston Beer Must Do to Increase Category Share</div>
+      <p class="text-sm text-slate-600 mb-4">Walmart 1st party data reveals clear seasonal gaps where BBC brands under-pace against their respective category benchmarks. Closing these gaps is the primary driver of category share growth at Walmart.</p>
+
+      <div class="space-y-4">
+
+        <!-- TWISTED TEA -->
+        <div class="opportunity-card bg-orange-50 border-orange-400">
+          <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+            <div>
+              <span class="badge badge-orange mb-1">Twisted Tea · Hard Beverage Category</span>
+              <h3 class="font-bold text-base text-orange-900">Close the Spring &amp; Summer Gap</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black text-orange-700">+21.34%</div>
+              <div class="text-xs text-orange-600">Category YoY growth</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <p class="text-xs font-bold text-orange-800 uppercase tracking-wide mb-1">The Problem</p>
+              <ul class="text-xs text-orange-900 space-y-1 list-disc list-inside">
+                <li>Twisted Tea under-paced the Hard Beverage category in Spring (March–May)</li>
+                <li>March–May accounts for <strong>25% of all annual category sales</strong> — a prime missed window</li>
+                <li>Under-paced further in key summer months, then dropped sharply in Fall</li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-orange-800 uppercase tracking-wide mb-1">What to Do</p>
+              <ul class="text-xs text-orange-900 space-y-1 list-disc list-inside">
+                <li><strong>Launch display campaigns by March</strong> to intercept shoppers before category peak</li>
+                <li>Increase investment in May–July to match category momentum</li>
+                <li>Maintain Fall presence through October to prevent the drop-off</li>
+                <li>Add CTV and Audio to capture Gen-Z during peak summer streaming season</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p class="text-xs font-bold text-orange-800 mb-1">Seasonal Investment Urgency</p>
+            <div class="flex gap-1 items-center text-xs text-orange-700">
+              <span class="w-16 shrink-0">Jan–Feb</span>
+              <div class="flex-1 season-bar"><div class="season-fill bg-orange-200" style="width:30%"></div></div>
+              <span class="w-10 text-right">Low</span>
+            </div>
+            <div class="flex gap-1 items-center text-xs text-orange-700 mt-1">
+              <span class="w-16 shrink-0">Mar–May</span>
+              <div class="flex-1 season-bar"><div class="season-fill bg-orange-500" style="width:90%"></div></div>
+              <span class="w-10 text-right font-bold">🔥 Peak</span>
+            </div>
+            <div class="flex gap-1 items-center text-xs text-orange-700 mt-1">
+              <span class="w-16 shrink-0">Jun–Aug</span>
+              <div class="flex-1 season-bar"><div class="season-fill bg-orange-400" style="width:80%"></div></div>
+              <span class="w-10 text-right font-bold">High</span>
+            </div>
+            <div class="flex gap-1 items-center text-xs text-orange-700 mt-1">
+              <span class="w-16 shrink-0">Sep–Oct</span>
+              <div class="flex-1 season-bar"><div class="season-fill bg-orange-300" style="width:55%"></div></div>
+              <span class="w-10 text-right">Medium</span>
+            </div>
+            <div class="flex gap-1 items-center text-xs text-orange-700 mt-1">
+              <span class="w-16 shrink-0">Nov–Dec</span>
+              <div class="flex-1 season-bar"><div class="season-fill bg-orange-200" style="width:30%"></div></div>
+              <span class="w-10 text-right">Low</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANGRY ORCHARD -->
+        <div class="opportunity-card bg-red-50 border-red-400">
+          <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+            <div>
+              <span class="badge badge-red mb-1">Angry Orchard · Craft Beer Category</span>
+              <h3 class="font-bold text-base text-red-900">Re-Engage Summer Shoppers &amp; Sustain Fall Momentum</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black text-red-700">-14.95%</div>
+              <div class="text-xs text-red-600">Angry Orchard YoY</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <p class="text-xs font-bold text-red-800 uppercase tracking-wide mb-1">The Problem</p>
+              <ul class="text-xs text-red-900 space-y-1 list-disc list-inside">
+                <li>Angry Orchard lagged behind the Craft Beer category in June and July — the category's <strong>peak sales months</strong></li>
+                <li>Sales are -14.95% YoY — the steepest decline across BBC brands</li>
+                <li>WMC activation in Oct/Nov did <strong>outpace the category</strong> — proving WMC data works for this brand</li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-red-800 uppercase tracking-wide mb-1">What to Do</p>
+              <ul class="text-xs text-red-900 space-y-1 list-disc list-inside">
+                <li><strong>Launch a dedicated summer campaign by June</strong> to close the category gap during peak months</li>
+                <li>Leverage lapsed buyer audiences to win back shoppers lost in the YoY decline</li>
+                <li>Extend the successful Oct/Nov WMC strategy to cover June–July</li>
+                <li>Use Craft Beer audience taxonomy to conquest switchers moving to competing craft brands</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUN CRUISER / TRULY -->
+        <div class="opportunity-card bg-blue-50 border-blue-400">
+          <div class="flex flex-wrap justify-between items-start gap-2 mb-2">
+            <div>
+              <span class="badge badge-blue mb-1">Sun Cruiser &amp; Truly · Hard Beverage Category</span>
+              <h3 class="font-bold text-base text-blue-900">Front-Load Spring Investment to Capture Seasonal Demand</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black text-blue-700">Flat</div>
+              <div class="text-xs text-blue-600">Sun Cruiser YoY</div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <p class="text-xs font-bold text-blue-800 uppercase tracking-wide mb-1">The Problem</p>
+              <ul class="text-xs text-blue-900 space-y-1 list-disc list-inside">
+                <li>Sun Cruiser under-paces against the Hard Beverage category — despite being a breakout brand</li>
+                <li>Truly saw peak sales in Sept/Oct, but is missing April–July — the prime amplification window</li>
+                <li>Both brands launched late in FY25 ($70K and $65K respectively) — undersized investment</li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-blue-800 uppercase tracking-wide mb-1">What to Do</p>
+              <ul class="text-xs text-blue-900 space-y-1 list-disc list-inside">
+                <li><strong>April–July is the prime investment window</strong> to drive sales and brand awareness for both brands</li>
+                <li>Increase Sun Cruiser and Truly campaign budgets above <strong>$150K</strong> so they qualify for Walmart Sales Lift and Brand Lift reporting in FY26.</li>
+                <li>Target "In-Market Hard Beverage" and "Hard Seltzer" category audiences for Sun Cruiser</li>
+                <li>Use "Healthy Living" and "Carb Conscious" personas for Truly to reach better-for-you shoppers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STRATEGIC RECS TABLE -->
+    <div class="section-card">
+      <div class="section-title">🧭 Strategic Recommendations to Increase Category Share</div>
+      <table>
+        <thead><tr><th>#</th><th>Recommendation</th><th>Brand(s)</th><th>Impact</th><th>Timing</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="font-black text-blue-700">1</td>
+            <td><strong>Launch spring campaigns by March</strong> to capture the 25% of annual sales that occur in March–May before Twisted Tea falls behind the category</td>
+            <td><span class="pill pill-amber">Twisted Tea</span></td>
+            <td><span class="badge badge-red">High</span></td>
+            <td>March–May</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">2</td>
+            <td><strong>Add CTV to the media mix</strong> — BBC's only available expansion beyond Offsite Display. Adding CTV moves buyer conversion from 2.6% to 3.6% and enables incremental TV reach measurement. Reaches Gen-Z during peak streaming season.</td>
+            <td><span class="pill pill-amber">All Brands</span></td>
+            <td><span class="badge badge-red">High</span></td>
+            <td>Q1 FY26</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">3</td>
+            <td><strong>Scale Sun Cruiser and Truly campaigns above $150K</strong> so all brands qualify for Sales Lift and Brand Lift reporting in FY26. Push key campaigns (Twisted Tea, Angry Orchard) above $350K to unlock the Strategic Campaign Analysis menu.</td>
+            <td><span class="pill pill-blue">Sun Cruiser</span><span class="pill pill-blue">Truly</span></td>
+            <td><span class="badge badge-red">High</span></td>
+            <td>All Campaigns</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">4</td>
+            <td><strong>Activate lapsed buyer audiences for Angry Orchard</strong> to re-engage shoppers lost in the -14.95% YoY decline. WMC data proved it outpaces the category in Oct/Nov — replicate this across summer.</td>
+            <td><span class="pill pill-red">Angry Orchard</span></td>
+            <td><span class="badge badge-red">High</span></td>
+            <td>June–July</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">5</td>
+            <td><strong>Use Custom Alcohol Taxonomy</strong> to conquest competitor audiences — target Mexican Import, Craft, and Hard Seltzer buyers and convert them to BBC brands</td>
+            <td><span class="pill pill-amber">All Brands</span></td>
+            <td><span class="badge badge-orange">Medium–High</span></td>
+            <td>Q2 FY26</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">6</td>
+            <td><strong>Add Audio (SiriusXM)</strong> to reach Gen-Z Walmart shoppers streaming music — 1.4x more likely to stream daily than the avg. US consumer. Align to summer playlists and lifestyle moments.</td>
+            <td><span class="pill pill-amber">Twisted Tea</span><span class="pill pill-blue">Sun Cruiser</span></td>
+            <td><span class="badge badge-orange">Medium</span></td>
+            <td>Summer FY26</td>
+          </tr>
+          <tr>
+            <td class="font-black text-blue-700">7</td>
+            <td><strong>Explore co-brand campaigns</strong> with natural basket partners (chips, deli meats, bread) to drive incremental basket size and cross-category purchases during tailgate and seasonal moments</td>
+            <td><span class="pill pill-amber">Twisted Tea</span></td>
+            <td><span class="badge badge-yellow">Medium</span></td>
+            <td>H2 FY26</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- WALMART REACH ADVANTAGE -->
+    <div class="section-card" style="border-left:4px solid var(--wm-blue);">
+      <div class="section-title">🏪 The Walmart Connect Reach Advantage</div>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+        <div class="bg-blue-50 rounded-xl p-3"><div class="text-lg font-black text-blue-700">61%</div><div class="text-xs text-blue-600 mt-0.5">of Walmart.com visitors did NOT visit Target.com in the same month</div></div>
+        <div class="bg-blue-50 rounded-xl p-3"><div class="text-lg font-black text-blue-700">83%</div><div class="text-xs text-blue-600 mt-0.5">did NOT visit Instacart</div></div>
+        <div class="bg-blue-50 rounded-xl p-3"><div class="text-lg font-black text-blue-700">90%</div><div class="text-xs text-blue-600 mt-0.5">did NOT visit Kroger.com</div></div>
+        <div class="bg-blue-50 rounded-xl p-3"><div class="text-lg font-black text-blue-700">98%</div><div class="text-xs text-blue-600 mt-0.5">did NOT visit Albertsons.com</div></div>
+        <div class="bg-blue-50 rounded-xl p-3"><div class="text-lg font-black text-blue-700">130M+</div><div class="text-xs text-blue-600 mt-0.5">unique monthly Walmart.com visitors</div></div>
+      </div>
+      <p class="text-xs text-slate-500 mt-3">Source: Comscore Media-Metrix Multi-Platform Cross-Visiting, Total Audience Jan–Dec 2024. Walmart Connect reaches an audience that simply cannot be found anywhere else — making WMC the most incremental media channel for BBC's category share growth strategy.</p>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: CAMPAIGN PERFORMANCE -->
+  <!-- ================================================================== -->
+  <div id="section-performance" class="tab-panel space-y-5">
+
+    <div class="section-card">
+      <div class="section-title">📅 FY25 Campaign Timeline &amp; Investment</div>
+      <table>
+        <thead><tr><th>Campaign</th><th>Brand</th><th>Flight</th><th>Investment</th><th>Est. Total Sales</th><th>Est. ROAS</th><th>Sales Lift</th><th>New Buyers %</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="font-semibold">Q2 Twisted Tea Summer</td>
+            <td><span class="badge badge-orange">Twisted Tea</span></td>
+            <td>5/22 – 7/31</td>
+            <td>$197K</td>
+            <td>$4.3M</td>
+            <td>$14.63</td>
+            <td><span class="badge badge-green">✅ Qualified</span></td>
+            <td>66%</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Q3 Twisted Tea</td>
+            <td><span class="badge badge-orange">Twisted Tea</span></td>
+            <td>8/12 – 10/31</td>
+            <td>$280K</td>
+            <td>$7.8M</td>
+            <td>$9.48</td>
+            <td><span class="badge badge-green">✅ Qualified</span></td>
+            <td>58%</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Q3 Angry Orchard</td>
+            <td><span class="badge badge-red">Angry Orchard</span></td>
+            <td>10/09 – 11/21</td>
+            <td>$180K</td>
+            <td>$393K</td>
+            <td>$20.76</td>
+            <td><span class="badge badge-green">✅ Qualified</span></td>
+            <td>53%</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Q3 Sun Cruiser</td>
+            <td><span class="badge badge-blue">Sun Cruiser</span></td>
+            <td>10/31 – 12/7</td>
+            <td>$70K</td>
+            <td>$86K</td>
+            <td>$6.62</td>
+            <td><span class="badge badge-gray">❌ Did not qualify</span></td>
+            <td>87%</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Q3 Truly</td>
+            <td><span class="badge badge-yellow">Truly</span></td>
+            <td>11/4 – 1/31</td>
+            <td>$65K</td>
+            <td>$1M</td>
+            <td>$18.51</td>
+            <td><span class="badge badge-gray">❌ Did not qualify</span></td>
+            <td>40%</td>
+          </tr>
+          <tr class="font-bold bg-blue-50">
+            <td>TOTAL</td>
+            <td></td>
+            <td>5/22 – 1/31</td>
+            <td>$793K</td>
+            <td>$12.6M</td>
+            <td>$15.4 avg.</td>
+            <td>14.5% avg. lift</td>
+            <td>57% avg.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="section-card">
+        <div class="section-title">📊 ROAS vs. Category Benchmarks</div>
+        <table>
+          <thead><tr><th>Metric</th><th>BBC FY25</th><th>Category 25th</th><th>Category 75th</th></tr></thead>
+          <tbody>
+            <tr><td class="font-semibold">ROAS (Traceable)</td><td class="font-bold text-blue-700">$6.36</td><td>$1.46</td><td>$8.30</td></tr>
+            <tr><td class="font-semibold">CTR</td><td class="font-bold text-blue-700">0.03%</td><td>0.05%</td><td>0.08%</td></tr>
+            <tr><td class="font-semibold">CPT</td><td class="font-bold text-blue-700">$2.52</td><td>$1.39</td><td>$5.13</td></tr>
+            <tr><td class="font-semibold">CVR</td><td class="font-bold text-blue-700">0.21%</td><td>0.11%</td><td>0.44%</td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-slate-500 mt-3">BBC's ROAS of $6.36 sits above the 25th percentile for the Hard &amp; Craft Beverage category. CTR trails the category median, suggesting creative optimization opportunity. CVR of 0.21% is within the category range.</p>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">🛒 Channel Breakdown (Traceable Sales)</div>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span class="font-semibold">In-Store</span><span class="text-slate-600">$4.37M · 91% of traceable sales</span></div>
+            <div class="season-bar"><div class="season-fill bg-blue-500" style="width:91%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span class="font-semibold">Pickup &amp; Delivery (OPD)</span><span class="text-slate-600">$394K · 9% of traceable sales</span></div>
+            <div class="season-bar"><div class="season-fill bg-green-400" style="width:9%"></div></div>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 mt-3">91% of all traceable sales were converted in-store — underscoring the power of Walmart's omnichannel audience and the opportunity to grow OPD volume through targeted digital activation.</p>
+        <div class="mt-3 p-3 bg-blue-50 rounded-lg text-xs text-blue-800">
+          💡 Targeting <strong>Pickup &amp; Delivery – Engaged</strong> persona shoppers could meaningfully shift the OPD mix and unlock a more trackable conversion path.
+        </div>
+      </div>
+    </div>
+
+    <!-- BASKET ANALYSIS -->
+    <div class="section-card">
+      <div class="section-title">🛍️ Basket Analysis — Cross-Category Co-Purchase Signals</div>
+      <p class="text-xs text-slate-500 mb-4">Shoppers exposed to BBC campaigns purchased the following categories alongside BBC products — revealing natural co-brand and contextual targeting opportunities.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <div class="text-xs font-bold text-orange-700 uppercase mb-2">Twisted Tea (Q2 Summer)</div>
+          <div class="space-y-1">
+            <div class="text-xs p-2 bg-orange-50 rounded"><strong>In-Store:</strong> Flavored Hard Bev · Hard Seltzers · Light Domestic · RTD Cocktails · Hard Ciders</div>
+            <div class="text-xs p-2 bg-orange-50 rounded"><strong>Online:</strong> Beer · Spirits · Chips · Bread · Sliced Deli Meats · Dips &amp; Spreads</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-blue-700 uppercase mb-2">Twisted Tea (Q3)</div>
+          <div class="space-y-1">
+            <div class="text-xs p-2 bg-blue-50 rounded"><strong>In-Store:</strong> Flavored Hard Bev · Singles · Hard Seltzers · Hard Ciders · Light Domestic</div>
+            <div class="text-xs p-2 bg-blue-50 rounded"><strong>Online:</strong> Beer · Wines · Chips · Milk · Baked Goods · Deli Meats · Eggs</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-red-700 uppercase mb-2">Angry Orchard (Q3)</div>
+          <div class="space-y-1">
+            <div class="text-xs p-2 bg-red-50 rounded"><strong>In-Store:</strong> Hard Ciders · Flavored Hard Bev · Local Craft · National Craft · Regional Craft · Mexican Import</div>
+            <div class="text-xs p-2 bg-red-50 rounded"><strong>Online:</strong> Beer · Spirits · Wines · Milk · Baked Goods · Pasta &amp; Sauce</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs text-yellow-900">
+        💡 <strong>Co-Brand Signal:</strong> Chips, deli meats, bread, and dips appear consistently across all campaigns — strong signals for co-brand campaigns with Frito-Lay, Kraft, and Bimbo Bakeries (Twisted Tea's first co-brand partner).
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: OMNI-MEDIA IMPACT -->
+  <!-- ================================================================== -->
+  <div id="section-omni" class="tab-panel space-y-5">
+
+    <div class="section-card">
+      <div class="section-title">🔗 Omni-Media Shopper-to-Buyer Conversion Rates</div>
+      <p class="text-sm text-slate-600 mb-2">Walmart Connect data shows that adding more ad products compounds buyer conversion rates. <strong>Note: Alcohol brands are restricted to Offsite Display and CTV — Onsite Display and Sponsored Search are not available.</strong> The full data is shown below for context, with BBC-eligible combinations highlighted.</p>
+      <div class="mb-4 p-3 bg-yellow-50 border border-yellow-300 rounded-lg text-xs text-yellow-900">⚠️ <strong>Alcohol Advertising Policy:</strong> BBC can only activate Offsite Display and CTV via Walmart Connect. Onsite Display and Sponsored Search are not eligible for alcohol brands. The combinations below labeled "not eligible" are shown for context only.</div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div class="rounded-xl p-4 text-center border-2 border-green-400 bg-green-50">
+          <div class="text-2xl font-black text-green-700">15.6%</div>
+          <div class="text-xs font-bold text-green-800 mt-1">CTV + Offsite + Onsite + Search</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-blue-300 bg-blue-50">
+          <div class="text-2xl font-black text-blue-700">11.6%</div>
+          <div class="text-xs font-bold text-blue-800 mt-1">Offsite + Onsite + Search</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-blue-300 bg-blue-50">
+          <div class="text-2xl font-black text-blue-700">8.3%</div>
+          <div class="text-xs font-bold text-blue-800 mt-1">CTV + Offsite + Onsite</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-slate-300 bg-slate-50">
+          <div class="text-2xl font-black text-slate-700">5.9%</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Offsite + Onsite</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-slate-300 bg-slate-50">
+          <div class="text-2xl font-black text-slate-700">5.0%</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Onsite + Search</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-slate-300 bg-slate-50">
+          <div class="text-2xl font-black text-slate-700">4.6%</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">CTV + Offsite + Search</div>
+          <div class="mt-1"><span class="badge badge-gray">Not eligible (alcohol)</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-green-500 bg-green-50">
+          <div class="text-2xl font-black text-green-700">3.6%</div>
+          <div class="text-xs font-bold text-green-800 mt-1">CTV + Offsite <span class="badge badge-green ml-1">BBC's next step ✅</span></div>
+        </div>
+        <div class="rounded-xl p-4 text-center border-2 border-red-200 bg-red-50">
+          <div class="text-2xl font-black text-red-700">2.6%</div>
+          <div class="text-xs font-bold text-red-800 mt-1">Offsite Display Only <span class="badge badge-red ml-1">BBC Today</span></div>
+        </div>
+      </div>
+      <div class="mt-4 p-4 rounded-xl" style="background:#eff6ff; border:1.5px solid #93c5fd;">
+        <p class="text-sm font-bold text-blue-800">📌 Key Insight</p>
+        <p class="text-sm text-blue-700 mt-1">BBC is currently operating at the <strong>2.6% Offsite Display-only buyer conversion rate</strong>. Adding CTV (the only other eligible channel for alcohol brands) moves the needle to <strong>3.6%</strong> — a 38% improvement with a single addition. CTV also enables the Brand Lift Report and unlocks the Omni Media Impact Report.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================================================== -->
+  <!-- TAB: MEASUREMENT -->
+  <!-- ================================================================== -->
+  <div id="section-measurement" class="tab-panel space-y-5">
+
+    <!-- UPDATED BADGE -->
+    <div class="flex items-center gap-2 px-1">
+      <span class="badge badge-spark">Updated FY26</span>
+      <span class="text-xs text-slate-500">Thresholds are now <strong>spend-based</strong> — impression minimums have been replaced by campaign spend minimums.</span>
+    </div>
+
+    <!-- MAIN REPORT TABLE -->
+    <div class="section-card">
+      <div class="section-title">📊 FY26 End of Campaign Reporting — Updated Measurement Menu</div>
+      <p class="text-sm text-slate-600 mb-4">Measurement thresholds have shifted from impression-based to <strong>spend-based minimums</strong>. BBC's FY25 investment of $793K across 5 campaigns is benchmarked against each threshold below.</p>
+      <table>
+        <thead><tr><th>Report Type</th><th>Spend Minimum</th><th>Eligible Channels</th><th>Report Elements</th><th>BBC Status</th><th>Why It Matters</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="font-semibold">Walmart Sales Lift Report</td>
+            <td><strong>$150K</strong><br/><span class="text-xs text-slate-500">CTV: 25M impressions</span></td>
+            <td>Display · CTV</td>
+            <td>Incremental Sales Analysis · New Buyer Analysis · Basket Analysis · Expanded ROAS Breakouts</td>
+            <td>
+              <span class="badge badge-green">✅ Active (3 of 5)</span>
+              <p class="text-xs text-slate-500 mt-1">Twisted Tea Q2 ($197K) ✅<br/>Twisted Tea Q3 ($280K) ✅<br/>Angry Orchard ($180K) ✅<br/>Sun Cruiser ($70K) ❌<br/>Truly ($65K) ❌</p>
+            </td>
+            <td>Core measurement layer. Sun Cruiser and Truly need budget increases above $150K to qualify in FY26.</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Strategic Campaign Analysis<br/><span class="text-xs text-slate-400">#Max Pick 3 from Menu</span></td>
+            <td><strong>$350K</strong><br/><span class="text-xs text-slate-500">Must be grouped with a Display campaign</span></td>
+            <td>Display (required)</td>
+            <td>
+              <span class="text-xs font-semibold text-slate-600">Pick up to 3 from:</span><br/>
+              Category Analysis · Lifetime Customer Value · Time to Transaction · Customer Profile Analysis · Gateway Analysis · Price Movement Analysis · <span class="font-semibold text-purple-700">Brand Health Assessment <span class="badge badge-gray">Scintilla Only</span></span>
+            </td>
+            <td>
+              <span class="badge badge-red">❌ Not Yet Unlocked</span>
+              <p class="text-xs text-slate-500 mt-1">No single FY25 campaign met the $350K threshold. Q3 Twisted Tea ($280K) was closest.</p>
+            </td>
+            <td>The most strategically powerful report for BBC. Category Analysis proves the seasonal share gap; LTV justifies long-term investment. Brand Health Assessment requires Scintilla subscription.</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Total Market Sales Lift Report</td>
+            <td><strong>$250K</strong></td>
+            <td>Display · OLV · CTV</td>
+            <td>Standard Walmart Sales Lift Metrics · 3rd Party Rest of Market Sales Analysis (NCS) · Online &amp; In-Store breakdown</td>
+            <td>
+              <span class="badge badge-yellow">⚠️ Partially Unlocked</span>
+              <p class="text-xs text-slate-500 mt-1">Twisted Tea Q3 ($280K) ✅<br/>All other campaigns below $250K ❌</p>
+            </td>
+            <td>Proves WMC efficacy vs. all other retail channels — the most powerful tool for justifying increased BBC investment at the executive level.</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Brand Lift Report</td>
+            <td><strong>$150K</strong></td>
+            <td>Display · OLV · CTV · <strong>Audio</strong></td>
+            <td>3rd Party Custom Brand Lift Study (UpWave / Kantar) · Awareness · Recall · Preference · Consideration · Association · Intent</td>
+            <td>
+              <span class="badge badge-green">✅ Active (3 of 5)</span>
+              <p class="text-xs text-slate-500 mt-1">Twisted Tea Q2 ($197K) ✅<br/>Twisted Tea Q3 ($280K) ✅<br/>Angry Orchard ($180K) ✅<br/>Sun Cruiser ($70K) ❌<br/>Truly ($65K) ❌</p>
+            </td>
+            <td>Critical for Angry Orchard (-14.95% YoY) — quantifies the brand awareness gap and builds the case for sustained WMC investment. Also unlocked for Audio, if BBC tests that channel.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ADDITIONAL REPORTS -->  
+    <div class="section-card">
+      <div class="section-title">✨ Additional Available Reports (FY26)</div>
+      <p class="text-sm text-slate-500 mb-4">The following supplemental reports are also available as part of the FY26 measurement suite. Eligibility details should be confirmed with your WMC team.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-bold text-slate-800 mb-1">📱 Media Audience Profile</div>
+          <p class="text-xs text-slate-600">Understand who is being reached — demographic and behavioral profile of shoppers exposed to BBC campaigns.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-bold text-slate-800 mb-1">🔎 Branded Search Volume Analysis</div>
+          <p class="text-xs text-slate-600">Measures the impact of media exposure on Walmart.com branded search volume for BBC brands — a signal of top-of-mind awareness.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-bold text-slate-800 mb-1">🛒 Display Ad Exposure Impact on Purchase Cycle</div>
+          <p class="text-xs text-slate-600">Analyzes how display ad exposure influences the path to purchase — including time to first transaction and purchase frequency changes.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-bold text-slate-800 mb-1">🔄 Customer Churn Analysis</div>
+          <p class="text-xs text-slate-600">Identifies which BBC buyers are at risk of lapsing and measures whether media exposure improves retention — highly relevant given Angry Orchard's -14.95% YoY trend.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-sm font-bold text-slate-800 mb-1">🔗 Omni Media Impact Report</div>
+          <p class="text-xs text-slate-600">Measures the combined lift across all active media touchpoints — quantifies the compounding effect of Offsite Display + CTV working together.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTMENT PATH (UPDATED) -->
+    <div class="section-card" style="border-left:4px solid var(--wm-spark);">
+      <div class="section-title">🎯 The Spend Path to Full Measurement Unlock</div>
+      <p class="text-xs text-slate-500 mb-4">Thresholds are now spend-based. Here's what BBC needs per campaign to unlock each reporting tier.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+          <div class="text-xl font-black text-green-700 mb-1">$150K</div>
+          <div class="text-sm font-bold text-green-800 mb-1">Base Tier</div>
+          <div class="text-xs text-green-700">Unlocks: Walmart Sales Lift Report &amp; Brand Lift Report</div>
+          <div class="mt-2 text-xs text-green-800"><strong>BBC Status:</strong> 3 of 5 campaigns qualify ✅</div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+          <div class="text-xl font-black text-yellow-700 mb-1">$250K</div>
+          <div class="text-sm font-bold text-yellow-800 mb-1">Growth Tier</div>
+          <div class="text-xs text-yellow-700">Unlocks: Total Market Sales Lift Report (Display, OLV, CTV)</div>
+          <div class="mt-2 text-xs text-yellow-800"><strong>BBC Status:</strong> 1 of 5 campaigns qualifies (Twisted Tea Q3) ⚠️</div>
+        </div>
+        <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+          <div class="text-xl font-black text-orange-700 mb-1">$350K</div>
+          <div class="text-sm font-bold text-orange-800 mb-1">Strategic Tier</div>
+          <div class="text-xs text-orange-700">Unlocks: Strategic Campaign Analysis — Pick 3 from Menu (incl. Brand Health via Scintilla)</div>
+          <div class="mt-2 text-xs text-orange-800"><strong>BBC Status:</strong> No FY25 campaign reached this threshold ❌</div>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div class="text-xl font-black text-blue-700 mb-1">Goal</div>
+          <div class="text-sm font-bold text-blue-800 mb-1">Full Unlock</div>
+          <div class="text-xs text-blue-700">Consolidate spend so key campaigns (Twisted Tea, Angry Orchard) hit $350K+ and unlock the full Strategic Analysis menu</div>
+          <div class="mt-2 text-xs text-blue-800"><strong>Outcome:</strong> Complete measurement suite active across all qualifying brands</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="mt-12 border-t border-slate-200 bg-white">
+  <div class="max-w-7xl mx-auto px-4 py-5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+    <div>Boston Beer Corporation · FY25 Annual Business Review · Walmart Connect · May 2025</div>
+    <div>Source: Boston_Beer_QBR FINAL.pdf · Proprietary &amp; Confidential</div>
+  </div>
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>
